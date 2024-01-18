@@ -24,7 +24,7 @@
 - name: Copy postfix_exporter into location
   ansible.builtin.get_url:
     url: "https://github.com/chas0amx/postfix_exporter/releases/download/v1/postfix_exporter"
-    dest: " /usr/local/bin/postfix_exporter"
+    dest: "/usr/local/bin/postfix_exporter"
     owner: postfix_exporter
     group: root
     mode: '0770'  # Set the file permissions to be executable
