@@ -22,13 +22,20 @@
     state: present
 
 - name: Copy postfix_exporter into location
-  copy:
-    src: files/postfix_exporter
-    dest: /usr/local/bin/postfix_exporter
+  ansible.builtin.get_url:
+    url: "https://github.com/chas0amx/postfix_exporter/releases/download/v1/postfix_exporter"
+    dest: " /usr/local/bin/postfix_exporter"
     owner: postfix_exporter
     group: root
-    mode: '0770'
+    mode: '0770'  # Set the file permissions to be executable
   when: postfix_exporter_version_check.stdout | length == 0
+  # copy:
+  #   src: files/postfix_exporter
+  #   dest: /usr/local/bin/postfix_exporter
+  #   owner: postfix_exporter
+  #   group: root
+  #   mode: '0770'
+  # when: postfix_exporter_version_check.stdout | length == 0
 
 - name: Copy the postfix_exporter systemd unit file
   template:
